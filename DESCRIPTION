@@ -1,0 +1,11 @@
+Package: esfpmda
+Title: Create e-Submission Package for PMDA or FDA 
+Version: 3.0
+Authors@R: 
+    person(given = "Leon",
+           family = "Pheng",
+           role = c("aut", "cre"),
+           email = "lhpheng@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: e-Submission Package R script
+RoxygenNote: 7.2.3
