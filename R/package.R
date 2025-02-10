@@ -169,7 +169,7 @@ mod<-function(filename,var){
 
 importfiles<-function(...){
  
-   library(haven)
+  library(haven)
   library(tidyverse)
   library(officer)
   library(flextable)
@@ -235,7 +235,7 @@ if(grepl("\\.csv$", lst$filename[i])){
       
   if(grepl("\\.xpt$", lst$filename[i])){
       tt<-as.data.frame(read_xpt(sour))
-      write.csv(tt,paste0(odir1,conv[i]),row.names = F)}
+      write.csv(tt,paste0(odir1,lst$rename[i],".csv"),row.names = F)}
     
   if(grepl("\\.html$", lst$filename[i])){
         library(rvest)
