@@ -1341,32 +1341,30 @@ step1<-function(){
   setwd(working.folder)
   if(!"list of files.csv"%in%dir()){
     lf<-data.frame(
-      filename=c("Enter original file name: ex: data.csv, pattab.tab, basemod.ctl,GOF.R, vpcoutput.tab, etc."),
-      type=c("ASSIGNED file type to be converted. Ex: txt for program in text or csv or xpt for dataset (required define for each variable post STEP2()). 
-             Note CSV is accepted. At STEP3(), the files will be converted to the assigned format"),
-      rename=c("RENAME file (FDA, <=8 character PMDA, original names are acepted). Used in STEP2()"),
-      keyvar=c("OPTIONAL: leave blank if txt or enter unique variables per row ex: ID,TIME"),
-      Structure=c("OPTIONAL: leave blank if txt or enter unique variables per row ex: per subject per time point"),
+      filename=c("File name with extension (.csv,.tab, .ctl,.R,.xpt,.sas"),
+      type=c("File type to beconverted (txt for program, csv or xpt for dataset (variable define reuired). 
+             Note the CSV is accepted by agencies."),
+      rename=c("Rename file (<=8 characters for FDA, original names are acepted for PMDA)."),
+      keyvar=c("key variable for each dataset. EX:ID,TIME,CMT for NONMEM, ID,TIME for Phoenix"),
+      Structure=c("EX: per subject per time point for PK dataset, per subject for ER dataset"),
                  
-      Program=c("Leave blank if no progragram or script was used to generate the dataset. Else, enter the script or program name (renamed)"),
-      description=c("ENTER DESCRIPTION ex: PK dataset, NONMEM residual output, NONMEM base model, GOF and VPC R script
+      Program=c("Name of program (renamed format) required to generate the dataset. OPTIONAL"),
+      description=c("File description ex: PK dataset, NONMEM residual output, NONMEM base model, GOF and VPC R script
                     VPC output, etc."),
-      subfolder=c("ENTER the names of folder for each item. Required by PMDA. ex: 1_pk_data, 2_base_model,3_covariates, etc."),
-      progNo=c("ENTER label or ID for each item. These flags will be used to map each item as input/output/or dependency.
-               It should be unnested format, example:#A00,#A01,#B01,#A10. Nested labels will cause duplication or mislabeling. 
-               Ex:#A1 and #A12 are nested"),
-      Software.version=c("ENTER software version (Pheonix, R, NONMEM,etc.) for text model or control file or R script. 
-                         Ex: NONMEM VERSION 7.4.3, R VERSION 3.0.0"),
-      Purpose=c("ENTER the purpose of each program used to generate TFL for the study report. Ex: NONMEM control file of base model,
-                R script for generating GOF and VPC plots for Figures 1 and 2 and Table 1 of the report (title?)"),
-      proNo.input=c("MAP the input for each program with the progNo, EX: if pkdatset (progNo #A00) is the input of base model (progNo #A02) and 
-                  GOF R script (progNo #A03), then enter #A02#A03 in the #A00 row "),
-      proNo.output=c("MAP the output for each program with the progNo, EX: if basetab (progNo #A00) and vpctab (progNo #A01) are the outputs of base model (progNo #A02) and 
-                  then enter #A00#A01 in the #A02 row"),
-      progNo.dependent=c("MAP the dependency for each program with the progNo, EX: if lhtool2 (progNo #A00) is R script used in program to generate GOF figures (progNo #A02)
-                         then enter #A00 in the #A02 row"),
-      sourcepath=c("ENTER location of each item (full path from File explorer). 
-                   At step2(), each file will be copied and converted to the assigned folders"))
+      subfolder=c("PMDA: subfolder name ex: 1_pk_data, 2_base_model,3_covariates, etc."),
+      progNo=c("PMDA: UNIQUE LABEL or ID for each item for mapping purpose.\n Note,use unnested format EX:#A00,#A01,#B01,#A10. 
+      Potential nesting labels may cause mislabeled or duplicate label Ex:#A1 is nested in #A10,#A12,etc. are nested"),
+      Software.version=c("PMADA: software version (Pheonix, R, NONMEM,etc.). Software Version is applied to control file, model text or R script."),
+      Purpose=c("PMDA: each program used to generate figures or tables for the study report should be listed here. Ex: NONMEM control file of base model,
+                R script for generating GOF and VPC plots for Figures 1 and 2 and Table 1 of the report (No)"),
+      proNo.input=c("PMDA: use progNo to MAP the input item for the given program, EX: if pkdatset (progNo #A00) is the input of base model (progNo #A02) and 
+                  GOF R script (progNo #A03), then enter #A02#A03 in proNo.input cell for #A00"),
+      proNo.output=c("PMDA: use progNo to MAP the output for each program, EX: if basetab (progNo #A00) and vpctab (progNo #A01) are the outputs of base model (progNo #A02) and 
+                  then enter #A00#A01 in proNo.output cell for #A02"),
+      progNo.dependent=c("PMDA: use progNo to MAP the dependency (R source) program for each program, EX: if lhtool2 (progNo #A00) is R script used in program to generate GOF figures (progNo #A02)
+                         then enter #A00 in progNo.dependent cell for #A02 row"),
+      sourcepath=c("ENTER location of each item (full path from File explorer)"))
+      
     flextable::save_as_html(flextable::flextable(lf),path="./list_of_file_helps.html")
 
 templ<-data.frame(filename= c("pd_twolast.csv","run9_Base_2CPT.mod","run9_Base_2CPT.lst","run9_Base_2CPT.tab",              
