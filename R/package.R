@@ -1341,7 +1341,7 @@ step1<-function(){
   setwd(working.folder)
   if(!"list of files.csv"%in%dir()){
     lf<-data.frame(
-      filename=c("ff.csv,ff.tab, ff.ctl,ff.R,ff.xpt,.sas"),
+      filename=c("file name with extension (.csv,.tab,.sas7bdat,.xpt,.html,.ctl,.R,.rmd"),
       type=c("program= txt, dataset= csv or xpt. Datasets in CSV are accepted by agencies."),
       rename=c("<=8 characters for FDA. PMDA accepts long original name."),
       keyvar=c("ex:for PK dataset, ID,TIME,CMT for NONMEM,and ID,TIME for Phoenix"),
