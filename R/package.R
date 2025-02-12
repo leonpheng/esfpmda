@@ -1341,29 +1341,21 @@ step1<-function(){
   setwd(working.folder)
   if(!"list of files.csv"%in%dir()){
     lf<-data.frame(
-      filename=c("File name with extension (.csv,.tab, .ctl,.R,.xpt,.sas"),
-      type=c("File type to beconverted (txt for program, csv or xpt for dataset (variable define reuired). 
-             Note the CSV is accepted by agencies."),
-      rename=c("Rename file (<=8 characters for FDA, original names are acepted for PMDA)."),
-      keyvar=c("key variable for each dataset. EX:ID,TIME,CMT for NONMEM, ID,TIME for Phoenix"),
-      Structure=c("EX: per subject per time point for PK dataset, per subject for ER dataset"),
-                 
-      Program=c("Name of program (renamed format) required to generate the dataset. OPTIONAL"),
-      description=c("File description ex: PK dataset, NONMEM residual output, NONMEM base model, GOF and VPC R script
-                    VPC output, etc."),
-      subfolder=c("PMDA: subfolder name ex: 1_pk_data, 2_base_model,3_covariates, etc."),
-      progNo=c("PMDA: UNIQUE LABEL or ID for each item for mapping purpose.\n Note,use unnested format EX:#A00,#A01,#B01,#A10. 
-      Potential nesting labels may cause mislabeled or duplicate label Ex:#A1 is nested in #A10,#A12,etc. are nested"),
-      Software.version=c("PMADA: software version (Pheonix, R, NONMEM,etc.). Software Version is applied to control file, model text or R script."),
-      Purpose=c("PMDA: each program used to generate figures or tables for the study report should be listed here. Ex: NONMEM control file of base model,
-                R script for generating GOF and VPC plots for Figures 1 and 2 and Table 1 of the report (No)"),
-      proNo.input=c("PMDA: use progNo to MAP the input item for the given program, EX: if pkdatset (progNo #A00) is the input of base model (progNo #A02) and 
-                  GOF R script (progNo #A03), then enter #A02#A03 in proNo.input cell for #A00"),
-      proNo.output=c("PMDA: use progNo to MAP the output for each program, EX: if basetab (progNo #A00) and vpctab (progNo #A01) are the outputs of base model (progNo #A02) and 
-                  then enter #A00#A01 in proNo.output cell for #A02"),
-      progNo.dependent=c("PMDA: use progNo to MAP the dependency (R source) program for each program, EX: if lhtool2 (progNo #A00) is R script used in program to generate GOF figures (progNo #A02)
-                         then enter #A00 in progNo.dependent cell for #A02 row"),
-      sourcepath=c("ENTER location of each item (full path from File explorer)"))
+      filename=c("ff.csv,ff.tab, ff.ctl,ff.R,ff.xpt,.sas"),
+      type=c("program= txt, dataset= csv or xpt. Datasets in CSV are accepted by agencies."),
+      rename=c("<=8 characters for FDA. PMDA accepts long original name."),
+      keyvar=c("ex:for PK dataset, ID,TIME,CMT for NONMEM,and ID,TIME for Phoenix"),
+      Structure=c("ex: per subject per time point for PK dataset, per subject for ER dataset"),
+      Program=c("Optional: program rename that was used to generate the dataset"),
+      description=c("ex: PK dataset, NONMEM residual output,etc."),
+      subfolder=c("PMDA: subfolder name (no blank space) ex: 1_pk_data"),
+      progNo=c("PMDA: Only UNIQUE or NON-NESTED label EX:#A00,#A01,#B01,#A10. !!#A1 is nested in #A10,#A12!!"),
+      Software.version=c("PMADA: software version (Pheonix, R, NONMEM,etc.) for control file, model text or R script."),
+      Purpose=c("PMDA: ex: R script for generating GOF and VPC plots for Figures 1 and 2 and Table 1 of the report (No)"),
+      proNo.input=c("PMDA: ex: if #A00 is the input #A02 and #A03 then enter #A00 in proNo.input cells for #A02 and #A03"),
+      proNo.output=c("PMDA: ex: if #A00 and #A01 are the outputs of #A02 then enter #A00#A01 in proNo.output cell for #A02"),
+      progNo.dependent=c("PMDA: dependency (R source) program. ex: if #A00 is depency of #A02 then enter #A00 in progNo.dependent cell for #A02"),
+      sourcepath=c("Paste the full path from File explorer as is)"))
       
     flextable::save_as_html(flextable::flextable(lf),path="./list_of_file_helps.html")
 
